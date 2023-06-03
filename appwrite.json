@@ -1,0 +1,188 @@
+{
+    "projectId": "6468d8d626df3c6cc1e8",
+    "projectName": "almost-whatsapp",
+    "functions": [
+        {
+            "$id": "6475beeaa5f4d4ee7e15",
+            "name": "addMembers",
+            "runtime": "node-16.0",
+            "path": "functions/addMembers",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 15,
+            "variables": {
+                "APPWRITE_FUNCTION_ENDPOINT": "http://192.168.85.242/v1",
+                "APPWRITE_FUNCTION_API_KEY": "7c27af9b3b75ebccb8ade67cf5066e880a0d430313f474381eeba0c6620e88c34ae6d7bdfe1a9e09ff02e761d29f7ecd8ad8a34ffd1c876773423199e32fd6b668fb51ebb03500204c6a4be7d902d758e6e5bb44e92bffc215b3328ed3b0bae6714c5611ccc1f35430d8dadb997bf58814314343b0c677153ab846822a539792"
+            }
+        },
+        {
+            "$id": "6476f7557b929be52b0d",
+            "name": "calculateContacts",
+            "runtime": "node-16.0",
+            "path": "functions/calculateContacts",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [
+                "any"
+            ],
+            "events": [
+                "teams.*.memberships.*.create"
+            ],
+            "schedule": "",
+            "timeout": 15,
+            "variables": {
+                "APPWRITE_FUNCTION_ENDPOINT": "http://192.168.85.242/v1",
+                "APPWRITE_FUNCTION_API_KEY": "41c488df5c9f6a703534a656bcdf6066ae988ee9cd511af303f592f90ea913931fd3a17e8ef0ab996178c0b87a38fe5659b568b8e2d025ee98437014c92fc60f0278a830d3a3a6343bda521bca71073b9fed0cc0c1ed09e062ea47ee943d72d0b768d66bbba19d1c0380b3685edefffc6e929b8fb3371825c34bcf0f3f99d170"
+            }
+        }
+    ],
+    "databases": [
+        {
+            "$id": "64764121d84665ec3b4b",
+            "name": "almost-whatsapp",
+            "$createdAt": "2023-05-30T18:32:01.885+00:00",
+            "$updatedAt": "2023-05-30T18:32:01.885+00:00"
+        }
+    ],
+    "collections": [
+        {
+            "$id": "64764177e44d26a4d5f8",
+            "$permissions": [
+                "create(\"any\")",
+                "read(\"any\")"
+            ],
+            "databaseId": "64764121d84665ec3b4b",
+            "name": "contacts",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "user_id",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "contact_id",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "email",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "format": "email",
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "user_contact",
+                    "type": "unique",
+                    "status": "available",
+                    "attributes": [
+                        "user_id",
+                        "contact_id"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "user",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "user_id"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "messages",
+            "$permissions": [
+                "create(\"any\")",
+                "read(\"any\")"
+            ],
+            "databaseId": "64764121d84665ec3b4b",
+            "name": "messages",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "contents",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 65000,
+                    "default": null
+                },
+                {
+                    "key": "group_id",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "user_id",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "email",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "format": "email",
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "group",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "group_id"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        }
+    ]
+}
